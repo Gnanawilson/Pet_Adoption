@@ -1,0 +1,24 @@
+.pet-details {
+  padding: 20px;
+}
+.pet-details img {
+  width: 300px;
+  height: auto;
+  margin: 10px 0;
+}
+.adoption-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+.adoption-form input {
+  margin: 5px 0;
+  padding: 8px;
+}
+.adoption-form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
