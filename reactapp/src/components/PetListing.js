@@ -13,12 +13,9 @@ function PetListing() {
   useEffect(() => {
     getPets()
       .then(setPets)
-      .catch(() => setError("Failed to load pets")) 
+      .catch(() => setError("Failed to load pets"))
       .finally(() => setLoading(false));
   }, []);
-
-  if (loading) return <div><p>Loading pets</p></div>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   const filteredPets = pets.filter((pet) => {
     const speciesMatch = speciesFilter === "All" || pet.species === speciesFilter;
@@ -26,38 +23,42 @@ function PetListing() {
     return speciesMatch && statusMatch;
   });
 
-  return (
-    <div className="pet-listing">
-      <h2>Available Pets</h2>
+return (
+<div className="pet-listing">
+<h2>Available Pets</h2>
 
-      <div className="filters">
-        <label htmlFor="species-filter">Filter by Species: </label>
-        <select
-          id="species-filter"
-          data-testid="species-filter"
-          value={speciesFilter}
-          onChange={(e) => setSpeciesFilter(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Dog">Dog</option>
-          <option value="Cat">Cat</option>
-        </select>
+<div className="filters">
+<label htmlFor="species-filter">Filter by Species: </label>
+<select
+id="species-filter"
+data-testid="species-filter"
+value={speciesFilter}
+onChange={(e) => setSpeciesFilter(e.target.value)}
+>
+<option value="All">All</option>
+<option value="Dog">Dog</option>
+<option value="Cat">Cat</option>
+</select>
 
-        <label htmlFor="status-filter">Filter by Status: </label>
-        <select
-          id="status-filter"
-          data-testid="status-filter"
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-        >
-          <option value="All">All</option>
-          <option value="Available">Available</option>
-          <option value="Adopted">Adopted</option>
-          <option value="Pending">Pending</option>
-        </select>
-      </div>
+<label htmlFor="status-filter">Filter by Status: </label>
+<select
+id="status-filter"
+data-testid="status-filter"
+value={statusFilter}
+onChange={(e) => setStatusFilter(e.target.value)}
+>
+<option value="All">All</option>
+<option value="Available">Available</option>
+<option value="Adopted">Adopted</option>
+<option value="Pending">Pending</option>
+</select>
+</div>
 
-{filteredPets.length > 0 ? (
+{loading ? (
+<p>Loading pets...</p>
+) : error ? (
+<p style={{ color: "red" }}>[Error - You need to specify the message]</p>
+) : filteredPets.length > 0 ? (
 <ul>
 {filteredPets.map((pet) => (
 <li key={pet.id} className="pet-card">
